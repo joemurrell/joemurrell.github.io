@@ -1,0 +1,21 @@
+title: Joe Murrell Projects
+description: Personal project portfolio and website
+author: Joe Murrell
+email: 
+
+# Build settings
+markdown: kramdown
+theme: minima
+
+# GitHub Pages configuration
+url: "https://joemurrell.github.io"
+baseurl: ""
+
+# Social links
+github_username: joemurrell
+
+# Exclude from processing
+exclude:
+  - README.md
+  - .git
+  - .gitignore
