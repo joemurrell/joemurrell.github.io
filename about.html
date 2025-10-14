@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Joe Murrell - Home</title>
+    <title>About - Joe Murrell</title>
     <style>
         * {
             margin: 0;
@@ -132,102 +132,55 @@
             display: block;
         }
         
-        .hero {
-            text-align: center;
-            padding: 4rem 2rem;
-            max-width: 800px;
-            margin: 0 auto;
-        }
-        
-        .hero h2 {
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
-            color: #667eea;
-        }
-        
-        .hero p {
-            font-size: 1.2rem;
-            color: #b0b0b0;
-            margin-bottom: 2rem;
-        }
-        
         .container {
-            max-width: 1200px;
+            max-width: 900px;
             margin: 2rem auto;
             padding: 0 2rem;
         }
         
-        .cta-button {
-            display: inline-block;
-            padding: 1rem 2rem;
-            background: #667eea;
-            color: white;
-            text-decoration: none;
-            border-radius: 4px;
-            transition: background 0.3s ease;
+        .content {
+            background: #2a2a2a;
+            padding: 3rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+        }
+        
+        .content h2 {
+            color: #667eea;
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .content h3 {
+            color: #8799f0;
+            font-size: 1.5rem;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+        }
+        
+        .content p {
+            color: #b0b0b0;
+            margin-bottom: 1rem;
             font-size: 1.1rem;
         }
         
-        .cta-button:hover {
-            background: #764ba2;
-        }
-        
-        .projects {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            margin-top: 2rem;
-        }
-        
-        .project-card {
-            background: #2a2a2a;
-            border-radius: 8px;
-            padding: 2rem;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.3);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-        
-        .project-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 4px 16px rgba(0,0,0,0.5);
-        }
-        
-        .project-card h3 {
-            color: #667eea;
+        .content ul {
+            margin-left: 2rem;
             margin-bottom: 1rem;
-            font-size: 1.5rem;
-        }
-        
-        .project-card p {
             color: #b0b0b0;
-            margin-bottom: 1rem;
         }
         
-        .project-card a {
-            display: inline-block;
-            padding: 0.5rem 1rem;
-            background: #667eea;
-            color: white;
+        .content li {
+            margin-bottom: 0.5rem;
+        }
+        
+        .content a {
+            color: #667eea;
             text-decoration: none;
-            border-radius: 4px;
-            transition: background 0.3s ease;
         }
         
-        .project-card a:hover {
-            background: #764ba2;
-        }
-        
-        .intro {
-            background: #2a2a2a;
-            padding: 2rem;
-            border-radius: 8px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.3);
-            margin-bottom: 2rem;
-        }
-        
-        .intro h2 {
-            color: #e0e0e0;
-            margin-bottom: 1rem;
+        .content a:hover {
+            text-decoration: underline;
         }
         
         footer {
@@ -254,7 +207,7 @@
         <div class="header-content">
             <div class="header-title">
                 <h1>Joe Murrell</h1>
-                <p>Developer & Creator</p>
+                <p>About Me</p>
             </div>
             <div class="hamburger" id="hamburger">
                 <span></span>
@@ -274,10 +227,28 @@
         </ul>
     </nav>
     
-    <div class="hero">
-        <h2>Welcome to My Portfolio</h2>
-        <p>I'm Joe Murrell, a developer passionate about creating innovative solutions and Discord integrations. Explore my work and get in touch!</p>
-        <a href="projects.html" class="cta-button">View My Projects</a>
+    <div class="container">
+        <div class="content">
+            <h2>About Me</h2>
+            
+            <p>Hi, I'm Joe Murrell, a developer passionate about creating innovative solutions and building tools that make a difference. I specialize in Discord integrations, web applications, and automation tools.</p>
+            
+            <h3>What I Do</h3>
+            <p>I focus on developing:</p>
+            <ul>
+                <li>Discord bots and integrations</li>
+                <li>Web applications and APIs</li>
+                <li>Automation tools and scripts</li>
+                <li>Data-driven solutions</li>
+            </ul>
+            
+            <h3>Get In Touch</h3>
+            <p>Want to collaborate or have questions? Feel free to reach out!</p>
+            <ul>
+                <li><strong>Email:</strong> <a href="mailto:joemurrell@gmail.com">joemurrell@gmail.com</a></li>
+                <li><strong>GitHub:</strong> <a href="https://github.com/joemurrell">github.com/joemurrell</a></li>
+            </ul>
+        </div>
     </div>
     
     <footer>
