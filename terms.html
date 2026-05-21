@@ -5,27 +5,48 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Terms of Service - Joe Murrell</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+        :root {
+            --bg: #0a0a0f;
+            --bg-elevated: #12121a;
+            --bg-card: #16161f;
+            --border: #24243a;
+            --border-strong: #2f2f4a;
+            --text: #e6e6f0;
+            --text-muted: #9898b0;
+            --text-dim: #6b6b85;
+            --accent-purple: #a78bfa;
+            --accent-blue: #60a5fa;
+            --accent-purple-deep: #7c3aed;
+            --accent-blue-deep: #3b82f6;
+            --glow-purple: rgba(139, 92, 246, 0.25);
+            --glow-blue: rgba(59, 130, 246, 0.2);
         }
-        
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
             line-height: 1.6;
-            color: #e0e0e0;
-            background: #1a1a1a;
+            color: var(--text);
+            background: var(--bg);
+            background-image:
+                radial-gradient(ellipse 80% 50% at 50% -10%, var(--glow-purple), transparent 60%),
+                radial-gradient(ellipse 60% 40% at 90% 10%, var(--glow-blue), transparent 60%);
+            background-attachment: fixed;
+            min-height: 100vh;
         }
-        
+
         header {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
+            background: rgba(10, 10, 15, 0.7);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
             padding: 1rem 2rem;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-            position: relative;
+            border-bottom: 1px solid var(--border);
+            position: sticky;
+            top: 0;
+            z-index: 100;
         }
-        
+
         .header-content {
             max-width: 1200px;
             margin: 0 auto;
@@ -33,22 +54,21 @@
             justify-content: space-between;
             align-items: center;
         }
-        
-        .header-title {
-            display: flex;
-            flex-direction: column;
-        }
-        
+
+        .header-title { display: flex; flex-direction: column; }
+
         header h1 {
-            font-size: 2rem;
-            margin-bottom: 0.25rem;
+            font-size: 1.75rem;
+            margin-bottom: 0.1rem;
+            background: linear-gradient(135deg, var(--accent-purple) 0%, var(--accent-blue) 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: -0.02em;
         }
-        
-        header p {
-            font-size: 1rem;
-            opacity: 0.9;
-        }
-        
+
+        header p { font-size: 0.9rem; color: var(--text-muted); }
+
         .hamburger {
             display: flex;
             flex-direction: column;
@@ -57,187 +77,152 @@
             padding: 8px;
             z-index: 1001;
         }
-        
+
         .hamburger span {
             width: 25px;
-            height: 3px;
-            background-color: white;
+            height: 2px;
+            background-color: var(--text);
             transition: all 0.3s ease;
         }
-        
-        .hamburger.active span:nth-child(1) {
-            transform: rotate(45deg) translate(5px, 5px);
-        }
-        
-        .hamburger.active span:nth-child(2) {
-            opacity: 0;
-        }
-        
-        .hamburger.active span:nth-child(3) {
-            transform: rotate(-45deg) translate(7px, -6px);
-        }
-        
+
+        .hamburger.active span:nth-child(1) { transform: rotate(45deg) translate(6px, 6px); }
+        .hamburger.active span:nth-child(2) { opacity: 0; }
+        .hamburger.active span:nth-child(3) { transform: rotate(-45deg) translate(7px, -7px); }
+
         .nav-menu {
             position: fixed;
             top: 0;
-            right: -300px;
-            width: 300px;
+            right: -320px;
+            width: 320px;
             height: 100vh;
-            background: #2a2a2a;
-            box-shadow: -2px 0 8px rgba(0,0,0,0.5);
+            background: var(--bg-elevated);
+            border-left: 1px solid var(--border);
+            box-shadow: -8px 0 32px rgba(0,0,0,0.5);
             transition: right 0.3s ease;
             z-index: 1000;
             padding: 5rem 2rem 2rem;
         }
-        
-        .nav-menu.active {
-            right: 0;
-        }
-        
-        .nav-menu ul {
-            list-style: none;
-        }
-        
-        .nav-menu li {
-            margin-bottom: 1.5rem;
-        }
-        
+
+        .nav-menu.active { right: 0; }
+        .nav-menu ul { list-style: none; }
+        .nav-menu li { margin-bottom: 0.5rem; }
+
         .nav-menu a {
-            color: #e0e0e0;
+            color: var(--text-muted);
             text-decoration: none;
-            font-size: 1.2rem;
+            font-size: 1.05rem;
             display: block;
-            padding: 0.5rem;
-            border-radius: 4px;
-            transition: background 0.3s ease, color 0.3s ease;
+            padding: 0.75rem 1rem;
+            border-radius: 6px;
+            transition: background 0.2s ease, color 0.2s ease;
         }
-        
-        .nav-menu a:hover {
-            background: #667eea;
-            color: white;
-        }
-        
+
+        .nav-menu a:hover { background: var(--bg-card); color: var(--accent-purple); }
+
         .nav-overlay {
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100vh;
-            background: rgba(0,0,0,0.5);
+            top: 0; left: 0;
+            width: 100%; height: 100vh;
+            background: rgba(0,0,0,0.6);
+            backdrop-filter: blur(4px);
+            -webkit-backdrop-filter: blur(4px);
             display: none;
             z-index: 999;
         }
-        
-        .nav-overlay.active {
-            display: block;
-        }
-        
-        .container {
-            max-width: 900px;
-            margin: 2rem auto;
-            padding: 0 2rem;
-        }
-        
+
+        .nav-overlay.active { display: block; }
+
+        .container { max-width: 900px; margin: 3rem auto; padding: 0 2rem; }
+
         .content {
-            background: #2a2a2a;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
             padding: 3rem;
-            border-radius: 8px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+            border-radius: 12px;
             margin-bottom: 2rem;
         }
-        
+
         .content h1 {
-            color: #667eea;
+            background: linear-gradient(135deg, #ffffff 0%, var(--accent-purple) 60%, var(--accent-blue) 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
             font-size: 2rem;
             margin-bottom: 1rem;
+            letter-spacing: -0.02em;
         }
-        
+
         .content h2 {
-            color: #667eea;
-            font-size: 1.5rem;
+            color: var(--accent-purple);
+            font-size: 1.4rem;
             margin-top: 2rem;
-            margin-bottom: 1rem;
+            margin-bottom: 0.75rem;
+            letter-spacing: -0.01em;
         }
-        
+
         .content h3 {
-            color: #8799f0;
-            font-size: 1.2rem;
+            color: var(--accent-blue);
+            font-size: 1.1rem;
             margin-top: 1.5rem;
             margin-bottom: 0.5rem;
         }
-        
-        .content p {
-            color: #b0b0b0;
-            margin-bottom: 1rem;
-        }
-        
+
+        .content p { color: var(--text-muted); margin-bottom: 1rem; font-size: 1rem; }
+
         .content ul, .content ol {
-            margin-left: 2rem;
+            margin-left: 1.5rem;
             margin-bottom: 1rem;
-            color: #b0b0b0;
+            color: var(--text-muted);
         }
-        
-        .content li {
-            margin-bottom: 0.5rem;
-        }
-        
-        .content a {
-            color: #667eea;
-            text-decoration: none;
-        }
-        
-        .content a:hover {
-            text-decoration: underline;
-        }
-        
+
+        .content li { margin-bottom: 0.4rem; }
+
+        .content a { color: var(--accent-blue); text-decoration: none; }
+        .content a:hover { color: var(--accent-purple); text-decoration: underline; }
+
         .content blockquote {
-            background: #1a1a1a;
-            border-left: 4px solid #667eea;
-            padding: 1rem;
+            background: var(--bg-elevated);
+            border-left: 3px solid var(--accent-purple);
+            padding: 1rem 1.25rem;
             margin: 1rem 0;
-            color: #d0d0d0;
+            border-radius: 0 6px 6px 0;
+            color: var(--text-muted);
         }
-        
+
         .content hr {
             border: none;
-            border-top: 1px solid #444;
+            border-top: 1px solid var(--border);
             margin: 2rem 0;
         }
-        
-        .meta {
-            color: #888;
-            font-size: 0.9rem;
-            margin-bottom: 1rem;
+
+        .meta { color: var(--text-dim); font-size: 0.9rem; margin-bottom: 1.25rem; }
+
+        code {
+            background: var(--bg-elevated);
+            border: 1px solid var(--border);
+            padding: 0.15rem 0.4rem;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+            color: var(--accent-blue);
         }
-        
+
         footer {
             text-align: center;
-            padding: 2rem;
-            color: #888;
-            margin-top: 3rem;
+            padding: 3rem 2rem 2rem;
+            color: var(--text-dim);
+            font-size: 0.9rem;
+            border-top: 1px solid var(--border);
+            margin-top: 4rem;
         }
-        
-        footer a {
-            color: #667eea;
-            text-decoration: none;
-        }
-        
-        footer a:hover {
-            text-decoration: underline;
-        }
-        
-        code {
-            background: #1a1a1a;
-            padding: 0.2rem 0.4rem;
-            border-radius: 3px;
-            font-family: 'Courier New', monospace;
-            color: #f0f0f0;
-        }
+
+        footer a { color: var(--accent-purple); text-decoration: none; }
+        footer a:hover { color: var(--accent-blue); }
     </style>
 </head>
 <body>
     <div class="nav-overlay" id="navOverlay"></div>
-    
+
     <header>
         <div class="header-content">
             <div class="header-title">
@@ -251,7 +236,7 @@
             </div>
         </div>
     </header>
-    
+
     <nav class="nav-menu" id="navMenu">
         <ul>
             <li><a href="index.html">Home</a></li>
@@ -261,85 +246,85 @@
             <li><a href="privacy.html">Privacy Policy</a></li>
         </ul>
     </nav>
-    
+
     <div class="container">
         <div class="content">
             <h1>Terms of Service</h1>
-            
+
             <p class="meta"><strong>Effective Date:</strong> October 13, 2025<br>
             <strong>Operator:</strong> Joe Murrell<br>
             <strong>Contact:</strong> <a href="mailto:joemurrell@gmail.com">joemurrell@gmail.com</a></p>
-            
+
             <hr>
-            
+
             <h2>1. Acceptance of Terms</h2>
-            
+
             <p>By using this Discord bot and related services ("Services"), you agree to these Terms of Service. If you do not agree, do not use the Services.</p>
-            
+
             <hr>
-            
+
             <h2>2. Use of Services</h2>
-            
+
             <p>The Services are provided for informational and entertainment purposes. You must be at least 13 years old and comply with Discord's Terms of Service.</p>
-            
+
             <p>You agree not to:</p>
             <ul>
                 <li>Use the Services for unlawful or harmful purposes</li>
                 <li>Attempt to reverse-engineer or misuse the Services</li>
                 <li>Abuse APIs or circumvent usage limits</li>
             </ul>
-            
+
             <hr>
-            
+
             <h2>3. Data and Privacy</h2>
-            
+
             <p>We collect minimal data necessary for operation, including Discord user IDs, usernames, server IDs, and command usage logs. See our <a href="privacy.html">Privacy Policy</a> for details.</p>
-            
+
             <hr>
-            
+
             <h2>4. Disclaimers</h2>
-            
+
             <p>The Services are provided "as is" without warranty of any kind. The bot's outputs may contain errors and should not be relied upon for critical decisions. We are not liable for any damages arising from use of the Services.</p>
-            
+
             <hr>
-            
+
             <h2>5. Termination</h2>
-            
+
             <p>We may suspend or terminate access to the Services at any time for any reason, including violation of these Terms or abusive activity.</p>
-            
+
             <hr>
-            
+
             <h2>6. Changes to Terms</h2>
-            
+
             <p>These Terms may be updated periodically. Continued use of the Services after updates constitutes acceptance of the revised Terms.</p>
-            
+
             <hr>
-            
+
             <h2>7. Contact</h2>
-            
+
             <p>Questions? Contact us at <a href="mailto:joemurrell@gmail.com">joemurrell@gmail.com</a> or via <a href="https://github.com/joemurrell">GitHub</a>.</p>
-            
+
             <hr>
-            
-            <p style="text-align: center; font-style: italic; color: #888; margin-top: 2rem;">© 2025 Joe Murrell. All rights reserved.</p>
+
+            <p style="text-align: center; font-style: italic; color: var(--text-dim); margin-top: 2rem;">© 2025 Joe Murrell. All rights reserved.</p>
         </div>
     </div>
-    
+
     <footer>
-        <p>© 2025 Joe Murrell | <a href="https://github.com/joemurrell">GitHub</a></p>
+        <p>© 2025 Joe Murrell · <a href="https://github.com/joemurrell">GitHub</a> · <a href="mailto:joemurrell@gmail.com">Email</a></p>
     </footer>
-    
+
     <script>
         const hamburger = document.getElementById('hamburger');
         const navMenu = document.getElementById('navMenu');
         const navOverlay = document.getElementById('navOverlay');
-        
+
         hamburger.addEventListener('click', () => {
             hamburger.classList.toggle('active');
             navMenu.classList.toggle('active');
             navOverlay.classList.toggle('active');
         });
-        
+
         navOverlay.addEventListener('click', () => {
             hamburger.classList.remove('active');
             navMenu.classList.remove('active');
