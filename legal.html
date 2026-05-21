@@ -3,195 +3,293 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Terms of Service & Privacy Policy - Joe Murrell</title>
+    <title>Terms of Service &amp; Privacy Policy - Joe Murrell</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+        :root {
+            --bg: #0a0a0f;
+            --bg-elevated: #12121a;
+            --bg-card: #16161f;
+            --border: #24243a;
+            --border-strong: #2f2f4a;
+            --text: #e6e6f0;
+            --text-muted: #9898b0;
+            --text-dim: #6b6b85;
+            --accent-purple: #a78bfa;
+            --accent-blue: #60a5fa;
+            --glow-purple: rgba(139, 92, 246, 0.25);
+            --glow-blue: rgba(59, 130, 246, 0.2);
         }
-        
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
             line-height: 1.6;
-            color: #e0e0e0;
-            background: #1a1a1a;
+            color: var(--text);
+            background: var(--bg);
+            background-image:
+                radial-gradient(ellipse 80% 50% at 50% -10%, var(--glow-purple), transparent 60%),
+                radial-gradient(ellipse 60% 40% at 90% 10%, var(--glow-blue), transparent 60%);
+            background-attachment: fixed;
+            min-height: 100vh;
         }
-        
+
         header {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 3rem 2rem;
-            text-align: center;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            background: rgba(10, 10, 15, 0.7);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            padding: 1rem 2rem;
+            border-bottom: 1px solid var(--border);
+            position: sticky;
+            top: 0;
+            z-index: 100;
         }
-        
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header-title { display: flex; flex-direction: column; }
+
         header h1 {
-            font-size: 2.5rem;
-            margin-bottom: 0.5rem;
+            font-size: 1.75rem;
+            margin-bottom: 0.1rem;
+            background: linear-gradient(135deg, var(--accent-purple) 0%, var(--accent-blue) 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: -0.02em;
         }
-        
-        header p {
-            font-size: 1.2rem;
-            opacity: 0.9;
+
+        header p { font-size: 0.9rem; color: var(--text-muted); }
+
+        .hamburger {
+            display: flex;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 4px;
+            padding: 8px;
+            z-index: 1001;
         }
-        
-        .container {
-            max-width: 900px;
-            margin: 2rem auto;
-            padding: 0 2rem;
+
+        .hamburger span {
+            width: 25px;
+            height: 2px;
+            background-color: var(--text);
+            transition: all 0.3s ease;
         }
-        
+
+        .hamburger.active span:nth-child(1) { transform: rotate(45deg) translate(6px, 6px); }
+        .hamburger.active span:nth-child(2) { opacity: 0; }
+        .hamburger.active span:nth-child(3) { transform: rotate(-45deg) translate(7px, -7px); }
+
+        .nav-menu {
+            position: fixed;
+            top: 0;
+            right: -320px;
+            width: 320px;
+            height: 100vh;
+            background: var(--bg-elevated);
+            border-left: 1px solid var(--border);
+            box-shadow: -8px 0 32px rgba(0,0,0,0.5);
+            transition: right 0.3s ease;
+            z-index: 1000;
+            padding: 5rem 2rem 2rem;
+        }
+
+        .nav-menu.active { right: 0; }
+        .nav-menu ul { list-style: none; }
+        .nav-menu li { margin-bottom: 0.5rem; }
+
+        .nav-menu a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 1.05rem;
+            display: block;
+            padding: 0.75rem 1rem;
+            border-radius: 6px;
+            transition: background 0.2s ease, color 0.2s ease;
+        }
+
+        .nav-menu a:hover { background: var(--bg-card); color: var(--accent-purple); }
+
+        .nav-overlay {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100vh;
+            background: rgba(0,0,0,0.6);
+            backdrop-filter: blur(4px);
+            -webkit-backdrop-filter: blur(4px);
+            display: none;
+            z-index: 999;
+        }
+
+        .nav-overlay.active { display: block; }
+
+        .container { max-width: 900px; margin: 3rem auto; padding: 0 2rem; }
+
         .content {
-            background: #2a2a2a;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
             padding: 3rem;
-            border-radius: 8px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+            border-radius: 12px;
             margin-bottom: 2rem;
         }
-        
+
         .content h1 {
-            color: #667eea;
+            background: linear-gradient(135deg, #ffffff 0%, var(--accent-purple) 60%, var(--accent-blue) 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
             font-size: 2rem;
             margin-bottom: 1rem;
             margin-top: 2rem;
+            letter-spacing: -0.02em;
         }
-        
-        .content h1:first-child {
-            margin-top: 0;
-        }
-        
+
+        .content h1:first-child { margin-top: 0; }
+
         .content h2 {
-            color: #667eea;
-            font-size: 1.5rem;
+            color: var(--accent-purple);
+            font-size: 1.4rem;
             margin-top: 2rem;
-            margin-bottom: 1rem;
+            margin-bottom: 0.75rem;
+            letter-spacing: -0.01em;
         }
-        
+
         .content h3 {
-            color: #8799f0;
-            font-size: 1.2rem;
+            color: var(--accent-blue);
+            font-size: 1.1rem;
             margin-top: 1.5rem;
             margin-bottom: 0.5rem;
         }
-        
-        .content p {
-            color: #b0b0b0;
-            margin-bottom: 1rem;
-        }
-        
+
+        .content p { color: var(--text-muted); margin-bottom: 1rem; font-size: 1rem; }
+
         .content ul, .content ol {
-            margin-left: 2rem;
+            margin-left: 1.5rem;
             margin-bottom: 1rem;
-            color: #b0b0b0;
+            color: var(--text-muted);
         }
-        
-        .content li {
-            margin-bottom: 0.5rem;
-        }
-        
-        .content a {
-            color: #667eea;
-            text-decoration: none;
-        }
-        
-        .content a:hover {
-            text-decoration: underline;
-        }
-        
+
+        .content li { margin-bottom: 0.4rem; }
+
+        .content a { color: var(--accent-blue); text-decoration: none; }
+        .content a:hover { color: var(--accent-purple); text-decoration: underline; }
+
         .content blockquote {
-            background: #1a1a1a;
-            border-left: 4px solid #667eea;
-            padding: 1rem;
+            background: var(--bg-elevated);
+            border-left: 3px solid var(--accent-purple);
+            padding: 1rem 1.25rem;
             margin: 1rem 0;
-            color: #d0d0d0;
+            border-radius: 0 6px 6px 0;
+            color: var(--text-muted);
         }
-        
+
         .content hr {
             border: none;
-            border-top: 1px solid #444;
+            border-top: 1px solid var(--border);
             margin: 2rem 0;
         }
-        
-        .meta {
-            color: #888;
-            font-size: 0.9rem;
-            margin-bottom: 1rem;
+
+        .meta { color: var(--text-dim); font-size: 0.9rem; margin-bottom: 1.25rem; }
+
+        code {
+            background: var(--bg-elevated);
+            border: 1px solid var(--border);
+            padding: 0.15rem 0.4rem;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+            color: var(--accent-blue);
         }
-        
+
         footer {
             text-align: center;
-            padding: 2rem;
-            color: #888;
-            margin-top: 3rem;
+            padding: 3rem 2rem 2rem;
+            color: var(--text-dim);
+            font-size: 0.9rem;
+            border-top: 1px solid var(--border);
+            margin-top: 4rem;
         }
-        
-        footer a {
-            color: #667eea;
-            text-decoration: none;
-        }
-        
-        footer a:hover {
-            text-decoration: underline;
-        }
-        
-        code {
-            background: #1a1a1a;
-            padding: 0.2rem 0.4rem;
-            border-radius: 3px;
-            font-family: 'Courier New', monospace;
-            color: #f0f0f0;
-        }
+
+        footer a { color: var(--accent-purple); text-decoration: none; }
+        footer a:hover { color: var(--accent-blue); }
     </style>
 </head>
 <body>
+    <div class="nav-overlay" id="navOverlay"></div>
+
     <header>
-        <h1>Joe Murrell</h1>
-        <p>Legal Information</p>
+        <div class="header-content">
+            <div class="header-title">
+                <h1>Joe Murrell</h1>
+                <p>Legal Information</p>
+            </div>
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
     </header>
-    
+
+    <nav class="nav-menu" id="navMenu">
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="projects.html">Projects</a></li>
+            <li><a href="terms.html">Terms of Service</a></li>
+            <li><a href="privacy.html">Privacy Policy</a></li>
+        </ul>
+    </nav>
+
     <div class="container">
         <div class="content">
             <h1>🧾 Terms of Service</h1>
-            
+
             <p class="meta"><strong>Effective Date:</strong> October 13, 2025<br>
             <strong>Last Updated:</strong> October 13, 2025<br>
             <strong>Operator:</strong> Joe Murrell<br>
-            <strong>Contact:</strong> <a href="mailto:joemurrell@gmail.com">joemurrell@gmail.com</a> • <a href="https://github.com/joemurrell">https://github.com/joemurrell</a></p>
-            
+            <strong>Contact:</strong> <a href="mailto:joemurrell@gmail.com">joemurrell@gmail.com</a> · <a href="https://github.com/joemurrell">github.com/joemurrell</a></p>
+
             <hr>
-            
+
             <blockquote>
                 <strong>By using or interacting with any of the services operated by Joe Murrell (the "Services"), including integrations within Discord or related platforms, you agree to these Terms of Service ("Terms").</strong><br>
                 If you do not agree, do not use or interact with the Services.
             </blockquote>
-            
+
             <hr>
-            
+
             <h2>⚙️ 1. Overview</h2>
-            
+
             <p>These Terms govern your use of the Services, which may include Discord integrations, APIs, automation tools, data-driven features, or AI-powered assistants.</p>
-            
+
             <p>The Services are provided for <strong>informational and entertainment purposes only</strong>.<br>
             Use of the Services constitutes your acceptance of these Terms.</p>
-            
+
             <hr>
-            
+
             <h2>👥 2. Eligibility</h2>
-            
+
             <p>To use the Services, you must:</p>
             <ul>
                 <li>Be at least <strong>13 years old</strong> (or the minimum age permitted by Discord).</li>
                 <li>Comply with all applicable laws and <strong>Discord's Terms of Service</strong> and <strong>Community Guidelines</strong>.</li>
                 <li>If under 18, have consent from a parent or guardian.</li>
             </ul>
-            
+
             <p>Server administrators are responsible for ensuring their members' compliance.</p>
-            
+
             <hr>
-            
+
             <h2>🛠️ 3. User Responsibilities</h2>
-            
+
             <p>You agree <strong>not to</strong>:</p>
             <ul>
                 <li>Use the Services for unlawful, harassing, exploitative, or disruptive purposes.</li>
@@ -199,33 +297,33 @@
                 <li>Circumvent limits, abuse APIs, or interfere with operations.</li>
                 <li>Upload or transmit any content that is illegal, infringing, or harmful.</li>
             </ul>
-            
+
             <p>Server owners and administrators are responsible for permissions and configurations when the Services are used within Discord.</p>
-            
+
             <hr>
-            
+
             <h2>📂 4. User-Generated Content</h2>
-            
+
             <p>Some Services may allow users to upload or provide documents, text, or other content ("User Content").</p>
-            
+
             <p>By providing User Content, you represent and warrant that:</p>
             <ul>
                 <li>You have the necessary rights and permissions to share it.</li>
                 <li>Your content does not infringe upon any third-party rights.</li>
                 <li>You grant the Operator a <strong>non-exclusive, worldwide license</strong> to process and store the content as necessary for functionality.</li>
             </ul>
-            
+
             <blockquote>
                 <strong>Note:</strong> The Services process content automatically without human review.<br>
                 The Operator does not verify the legality, accuracy, or ownership of submitted content.
             </blockquote>
-            
+
             <hr>
-            
-            <h2>💸 5. Premium Features & Payments</h2>
-            
+
+            <h2>💸 5. Premium Features &amp; Payments</h2>
+
             <p>Certain features or usage tiers may require payment.</p>
-            
+
             <p>By purchasing or subscribing, you agree that:</p>
             <ul>
                 <li>All payments are <strong>final and non-refundable</strong>, except where required by law.</li>
@@ -233,147 +331,147 @@
                 <li>Payments are processed by trusted third-party providers (e.g., Stripe, Patreon, Ko-fi).</li>
                 <li>Access may be revoked for abuse, violation, or non-compliance.</li>
             </ul>
-            
+
             <p>The Operator does <strong>not</strong> directly handle or store your payment information.</p>
-            
+
             <hr>
-            
-            <h2>🧠 6. Data & Privacy</h2>
-            
+
+            <h2>🧠 6. Data &amp; Privacy</h2>
+
             <p>We collect only minimal information necessary to operate the Services, which may include:</p>
             <ul>
                 <li>Discord user IDs, usernames, and server IDs</li>
                 <li>Command usage logs and performance metrics</li>
             </ul>
-            
+
             <p>Data is used solely for operational, diagnostic, or analytical purposes.<br>
             No personal information is sold or shared outside legitimate service operation.</p>
-            
-            <p>A detailed <a href="#privacy-policy">Privacy Policy</a> will describe specific data practices, including how to request data deletion.</p>
-            
+
+            <p>A detailed <a href="#privacy-policy">Privacy Policy</a> is included below and describes specific data practices, including how to request data deletion.</p>
+
             <hr>
-            
+
             <h2>⚖️ 7. Disclaimers</h2>
-            
+
             <p>The Services and their outputs are generated automatically and may contain errors or omissions.<br>
             They are not guaranteed to be accurate, complete, or suitable for any purpose.</p>
-            
+
             <blockquote>
                 The Services are provided <strong>"as is"</strong> and <strong>"as available"</strong> without warranty of any kind—express, implied, or statutory—including but not limited to warranties of merchantability, fitness for a particular purpose, and non-infringement.
             </blockquote>
-            
+
             <p>You acknowledge and agree that you will not rely on these Services for factual, legal, operational, or safety-critical decisions.</p>
-            
+
             <hr>
-            
+
             <h2>💥 8. Limitation of Liability</h2>
-            
+
             <p>To the fullest extent permitted by law:</p>
             <ul>
                 <li>The Operator shall <strong>not</strong> be liable for any indirect, incidental, consequential, special, punitive, or exemplary damages, including loss of data, revenue, or business.</li>
                 <li>Total cumulative liability for all claims shall not exceed the greater of <strong>$10 USD</strong> or the amount paid (if any) for the Services in the 12 months preceding the event.</li>
             </ul>
-            
+
             <p>Your sole remedy is to discontinue use of the Services.</p>
-            
+
             <hr>
-            
+
             <h2>🧩 9. Indemnification</h2>
-            
+
             <p>You agree to <strong>indemnify, defend, and hold harmless</strong> the Operator, affiliates, and agents from any and all claims, damages, losses, liabilities, and expenses (including reasonable attorney's fees) arising out of:</p>
             <ul>
                 <li>Your use or misuse of the Services,</li>
                 <li>Your violation of these Terms, or</li>
                 <li>Your violation of any rights of another party.</li>
             </ul>
-            
+
             <hr>
-            
+
             <h2>🧱 10. Service Availability</h2>
-            
+
             <p>The Operator may modify, suspend, or discontinue parts of the Services at any time without notice.<br>
             Service uptime is not guaranteed, and temporary outages may occur due to maintenance, updates, or platform-level interruptions (e.g., Discord API downtime).</p>
-            
+
             <hr>
-            
+
             <h2>🧨 11. Termination</h2>
-            
+
             <p>We may suspend or terminate access to the Services, paid or free, at any time and for any reason, including:</p>
             <ul>
                 <li>Violation of these Terms</li>
                 <li>Abusive or malicious activity</li>
                 <li>Legal or technical necessity</li>
             </ul>
-            
+
             <p>Upon termination, access ceases immediately, and related data may be deleted.</p>
-            
+
             <hr>
-            
-            <h2>⚖️ 12. Governing Law & Jurisdiction</h2>
-            
+
+            <h2>⚖️ 12. Governing Law &amp; Jurisdiction</h2>
+
             <p>These Terms are governed by the laws of the <strong>State of California</strong>, USA, without regard to conflict-of-law rules.</p>
-            
+
             <blockquote>
                 You agree that any dispute shall be resolved exclusively in the courts located in <strong>California</strong>, and you waive any right to a jury trial or to participate in a class or representative proceeding.
             </blockquote>
-            
+
             <hr>
-            
+
             <h2>📜 13. Intellectual Property</h2>
-            
+
             <p>All source code, branding, designs, and content related to the Services are the exclusive property of the Operator, unless otherwise noted.<br>
             Open-source components remain under their respective licenses.</p>
-            
+
             <hr>
-            
+
             <h2>🧾 14. Changes to Terms</h2>
-            
+
             <p>These Terms may be updated periodically.<br>
             The most recent version will always be available on GitHub or via the relevant Discord command (e.g., <code>/tos</code>).<br>
             Continued use of the Services after any update constitutes acceptance of the revised Terms.</p>
-            
+
             <hr>
-            
+
             <h2>📬 15. Contact</h2>
-            
+
             <p>Questions, concerns, or DMCA notices?</p>
             <ul>
                 <li><strong>Email:</strong> <a href="mailto:joemurrell@gmail.com">joemurrell@gmail.com</a></li>
-                <li><strong>GitHub:</strong> <a href="https://github.com/joemurrell">https://github.com/joemurrell</a></li>
+                <li><strong>GitHub:</strong> <a href="https://github.com/joemurrell">github.com/joemurrell</a></li>
             </ul>
-            
+
             <hr>
-            
+
             <blockquote>
                 By using the Services, you acknowledge that you have read, understood, and agreed to these Terms of Service.
             </blockquote>
-            
+
             <hr>
-            
-            <p style="text-align: center; font-style: italic; color: #888; margin-top: 2rem;">© 2025 Joe Murrell. All rights reserved.</p>
-            
+
+            <p style="text-align: center; font-style: italic; color: var(--text-dim); margin-top: 2rem;">© 2025 Joe Murrell. All rights reserved.</p>
+
             <hr style="margin-top: 4rem; margin-bottom: 4rem;">
-            
+
             <h1 id="privacy-policy">🔒 Privacy Policy</h1>
-            
+
             <p class="meta"><strong>Effective Date:</strong> October 13, 2025<br>
             <strong>Last Updated:</strong> October 13, 2025<br>
             <strong>Operator:</strong> Joe Murrell<br>
-            <strong>Contact:</strong> <a href="mailto:joemurrell@gmail.com">joemurrell@gmail.com</a> • <a href="https://github.com/joemurrell">https://github.com/joemurrell</a></p>
-            
+            <strong>Contact:</strong> <a href="mailto:joemurrell@gmail.com">joemurrell@gmail.com</a> · <a href="https://github.com/joemurrell">github.com/joemurrell</a></p>
+
             <hr>
-            
+
             <blockquote>
                 This Privacy Policy explains how information is collected, used, and protected when you interact with the Services operated by Joe Murrell ("Operator," "we," "our," or "us"), including integrations that function through <strong>Discord</strong> or related platforms.<br><br>
                 By using the Services, you agree to the collection and use of information as described in this Policy.
             </blockquote>
-            
+
             <hr>
-            
+
             <h2>🧱 1. Information We Collect</h2>
-            
+
             <p>We collect only the data necessary to operate and improve the Services.</p>
-            
+
             <h3>A. Automatically Collected Data</h3>
             <p>When you interact with the Services (for example, using a Discord command), the following information may be recorded:</p>
             <ul>
@@ -382,17 +480,17 @@
                 <li><strong>Command inputs</strong> or parameters (e.g., text entered in slash commands)</li>
                 <li><strong>Timestamps</strong> and technical logs (for performance, debugging, and moderation)</li>
             </ul>
-            
+
             <h3>B. User-Submitted Content</h3>
             <p>Some Services may allow uploading or submission of content (e.g., text files, PDFs, or prompts).<br>
             That content is processed automatically for functionality (for example, enabling search, analysis, or AI responses).</p>
-            
+
             <ul>
                 <li>Uploaded data may be temporarily stored and indexed for performance.</li>
                 <li>Each Discord server's data is kept isolated from others.</li>
                 <li>We do <strong>not</strong> manually review or access your data unless required for debugging or abuse prevention.</li>
             </ul>
-            
+
             <h3>C. Payment Information</h3>
             <p>If you subscribe or make a purchase through a third-party provider (e.g., Stripe, Patreon, Ko-fi):</p>
             <ul>
@@ -400,11 +498,11 @@
                 <li>We <strong>do not</strong> receive or store full payment card details.</li>
                 <li>We may store limited metadata such as your Discord ID or transaction reference to verify access.</li>
             </ul>
-            
+
             <hr>
-            
+
             <h2>⚙️ 2. How We Use Information</h2>
-            
+
             <p>We use collected data strictly for operational purposes, including:</p>
             <ul>
                 <li>Responding to user commands and running bot functions</li>
@@ -413,15 +511,15 @@
                 <li>Managing premium features, billing validation, or support requests</li>
                 <li>Complying with legal obligations (if any)</li>
             </ul>
-            
+
             <p>We do <strong>not</strong> sell or rent personal data.</p>
-            
+
             <hr>
-            
-            <h2>🧠 3. AI & External Processing</h2>
-            
+
+            <h2>🧠 3. AI &amp; External Processing</h2>
+
             <p>Some Services use third-party APIs such as <strong>OpenAI</strong>, <strong>Anthropic</strong>, or similar AI providers to process text or generate responses.</p>
-            
+
             <p>When you submit a query or upload data:</p>
             <ul>
                 <li>Relevant text content may be sent securely to these APIs.</li>
@@ -429,49 +527,49 @@
                 <li>We do <strong>not</strong> allow these providers to use your content for training or marketing.</li>
                 <li>We comply with their respective data use and retention policies.</li>
             </ul>
-            
+
             <hr>
-            
-            <h2>🧱 4. Data Retention & Deletion</h2>
-            
+
+            <h2>🧱 4. Data Retention &amp; Deletion</h2>
+
             <ul>
                 <li>Operational logs are typically retained for up to <strong>30 days</strong> for diagnostics and abuse prevention.</li>
                 <li>Uploaded or indexed content may persist while active in the system but can be deleted upon request.</li>
                 <li>Backups may contain residual data for limited periods due to system processes.</li>
             </ul>
-            
+
             <h3>Requesting Data Deletion</h3>
             <p>You may request deletion of your data by emailing <strong><a href="mailto:joemurrell@gmail.com">joemurrell@gmail.com</a></strong> or contacting through GitHub.<br>
             Include your <strong>Discord user ID</strong> and relevant server name so we can locate and remove associated data.</p>
-            
+
             <hr>
-            
-            <h2>🛡️ 5. Data Sharing & Disclosure</h2>
-            
+
+            <h2>🛡️ 5. Data Sharing &amp; Disclosure</h2>
+
             <p>We do <strong>not</strong> share personal information with third parties except:</p>
             <ul>
                 <li><strong>Platform providers</strong> such as Discord or OpenAI, to fulfill functionality</li>
                 <li><strong>Payment processors</strong>, if you subscribe or donate</li>
                 <li><strong>Law enforcement</strong>, if required by valid legal process or to prevent harm or abuse</li>
             </ul>
-            
+
             <p>We will never sell your personal information.</p>
-            
+
             <hr>
-            
+
             <h2>⚖️ 6. Legal Basis for Processing (GDPR)</h2>
-            
+
             <p>If you are located in the European Economic Area (EEA), processing of your data is based on:</p>
             <ul>
                 <li><strong>Contractual necessity</strong> — to provide the requested Services</li>
                 <li><strong>Legitimate interests</strong> — to maintain and improve the Services</li>
                 <li><strong>Legal obligation</strong> — to comply with applicable laws</li>
             </ul>
-            
+
             <hr>
-            
+
             <h2>🌍 7. Your Rights</h2>
-            
+
             <p>Depending on your jurisdiction (e.g., GDPR, CCPA), you may have the right to:</p>
             <ul>
                 <li>Request access to the data we hold about you</li>
@@ -479,69 +577,87 @@
                 <li>Object to or restrict processing</li>
                 <li>Request data portability</li>
             </ul>
-            
+
             <p>To exercise any of these rights, contact <strong><a href="mailto:joemurrell@gmail.com">joemurrell@gmail.com</a></strong> with your Discord user ID.</p>
-            
+
             <hr>
-            
+
             <h2>🔐 8. Security</h2>
-            
+
             <p>We use reasonable technical and organizational measures to protect your information, including:</p>
             <ul>
                 <li>Limited access to operational systems</li>
                 <li>API-level authentication and rate limiting</li>
                 <li>Secure encrypted connections for API communications (HTTPS/TLS)</li>
             </ul>
-            
+
             <p>However, no online system is completely secure, and we cannot guarantee absolute security of transmitted data.</p>
-            
+
             <hr>
-            
+
             <h2>📜 9. Children's Privacy</h2>
-            
+
             <p>The Services are intended for users <strong>13 years of age or older</strong>, consistent with Discord's age requirements.<br>
             We do not knowingly collect personal information from anyone under that age.<br>
             If you believe a child has submitted data, please contact us for removal.</p>
-            
+
             <hr>
-            
-            <h2>🧩 10. Third-Party Links & Integrations</h2>
-            
+
+            <h2>🧩 10. Third-Party Links &amp; Integrations</h2>
+
             <p>Our Services may contain links or connections to other sites, APIs, or Discord servers not operated by us.<br>
             We are not responsible for the privacy practices or content of those external entities.</p>
-            
+
             <hr>
-            
+
             <h2>🧾 11. Changes to This Policy</h2>
-            
+
             <p>We may update this Privacy Policy periodically.<br>
             The most current version will always be available via GitHub or the applicable Discord command (e.g., <code>/privacy</code>).<br>
             Continued use of the Services after updates constitutes acceptance of the revised Policy.</p>
-            
+
             <hr>
-            
+
             <h2>📬 12. Contact</h2>
-            
+
             <p>Questions or requests regarding privacy should be directed to:</p>
             <ul>
                 <li><strong>Email:</strong> <a href="mailto:joemurrell@gmail.com">joemurrell@gmail.com</a></li>
-                <li><strong>GitHub:</strong> <a href="https://github.com/joemurrell">https://github.com/joemurrell</a></li>
+                <li><strong>GitHub:</strong> <a href="https://github.com/joemurrell">github.com/joemurrell</a></li>
             </ul>
-            
+
             <hr>
-            
+
             <blockquote>
                 By using or interacting with the Services, you acknowledge that you have read and understood this Privacy Policy.
             </blockquote>
-            
+
             <hr>
-            
-            <p style="text-align: center; font-style: italic; color: #888; margin-top: 2rem;">© 2025 Joe Murrell. All rights reserved.</p>
+
+            <p style="text-align: center; font-style: italic; color: var(--text-dim); margin-top: 2rem;">© 2025 Joe Murrell. All rights reserved.</p>
         </div>
     </div>
-    
+
     <footer>
-        <p>© 2025 Joe Murrell | <a href="https://github.com/joemurrell">GitHub</a> | <a href="index.html">Home</a></p>
+        <p>© 2025 Joe Murrell · <a href="https://github.com/joemurrell">GitHub</a> · <a href="index.html">Home</a></p>
     </footer>
+
+    <script>
+        const hamburger = document.getElementById('hamburger');
+        const navMenu = document.getElementById('navMenu');
+        const navOverlay = document.getElementById('navOverlay');
+
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('active');
+            navMenu.classList.toggle('active');
+            navOverlay.classList.toggle('active');
+        });
+
+        navOverlay.addEventListener('click', () => {
+            hamburger.classList.remove('active');
+            navMenu.classList.remove('active');
+            navOverlay.classList.remove('active');
+        });
+    </script>
 </body>
 </html>
