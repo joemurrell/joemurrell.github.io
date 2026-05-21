@@ -5,27 +5,58 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Joe Murrell - Home</title>
     <style>
+        :root {
+            --bg: #0a0a0f;
+            --bg-elevated: #12121a;
+            --bg-card: #16161f;
+            --bg-card-hover: #1c1c28;
+            --border: #24243a;
+            --border-strong: #2f2f4a;
+            --text: #e6e6f0;
+            --text-muted: #9898b0;
+            --text-dim: #6b6b85;
+            --accent-purple: #a78bfa;
+            --accent-blue: #60a5fa;
+            --accent-purple-deep: #7c3aed;
+            --accent-blue-deep: #3b82f6;
+            --glow-purple: rgba(139, 92, 246, 0.25);
+            --glow-blue: rgba(59, 130, 246, 0.2);
+        }
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
-        
+
+        html {
+            scroll-behavior: smooth;
+        }
+
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
             line-height: 1.6;
-            color: #e0e0e0;
-            background: #1a1a1a;
+            color: var(--text);
+            background: var(--bg);
+            background-image:
+                radial-gradient(ellipse 80% 50% at 50% -10%, var(--glow-purple), transparent 60%),
+                radial-gradient(ellipse 60% 40% at 90% 10%, var(--glow-blue), transparent 60%);
+            background-attachment: fixed;
+            min-height: 100vh;
         }
-        
+
         header {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
+            background: rgba(10, 10, 15, 0.7);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            color: var(--text);
             padding: 1rem 2rem;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-            position: relative;
+            border-bottom: 1px solid var(--border);
+            position: sticky;
+            top: 0;
+            z-index: 100;
         }
-        
+
         .header-content {
             max-width: 1200px;
             margin: 0 auto;
@@ -33,22 +64,27 @@
             justify-content: space-between;
             align-items: center;
         }
-        
+
         .header-title {
             display: flex;
             flex-direction: column;
         }
-        
+
         header h1 {
-            font-size: 2rem;
-            margin-bottom: 0.25rem;
+            font-size: 1.75rem;
+            margin-bottom: 0.1rem;
+            background: linear-gradient(135deg, var(--accent-purple) 0%, var(--accent-blue) 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: -0.02em;
         }
-        
+
         header p {
-            font-size: 1rem;
-            opacity: 0.9;
+            font-size: 0.9rem;
+            color: var(--text-muted);
         }
-        
+
         .hamburger {
             display: flex;
             flex-direction: column;
@@ -57,199 +93,357 @@
             padding: 8px;
             z-index: 1001;
         }
-        
+
         .hamburger span {
             width: 25px;
-            height: 3px;
-            background-color: white;
+            height: 2px;
+            background-color: var(--text);
             transition: all 0.3s ease;
         }
-        
+
         .hamburger.active span:nth-child(1) {
-            transform: rotate(45deg) translate(5px, 5px);
+            transform: rotate(45deg) translate(6px, 6px);
         }
-        
+
         .hamburger.active span:nth-child(2) {
             opacity: 0;
         }
-        
+
         .hamburger.active span:nth-child(3) {
-            transform: rotate(-45deg) translate(7px, -6px);
+            transform: rotate(-45deg) translate(7px, -7px);
         }
-        
+
         .nav-menu {
             position: fixed;
             top: 0;
-            right: -300px;
-            width: 300px;
+            right: -320px;
+            width: 320px;
             height: 100vh;
-            background: #2a2a2a;
-            box-shadow: -2px 0 8px rgba(0,0,0,0.5);
+            background: var(--bg-elevated);
+            border-left: 1px solid var(--border);
+            box-shadow: -8px 0 32px rgba(0,0,0,0.5);
             transition: right 0.3s ease;
             z-index: 1000;
             padding: 5rem 2rem 2rem;
         }
-        
+
         .nav-menu.active {
             right: 0;
         }
-        
+
         .nav-menu ul {
             list-style: none;
         }
-        
+
         .nav-menu li {
-            margin-bottom: 1.5rem;
+            margin-bottom: 0.5rem;
         }
-        
+
         .nav-menu a {
-            color: #e0e0e0;
+            color: var(--text-muted);
             text-decoration: none;
-            font-size: 1.2rem;
+            font-size: 1.05rem;
             display: block;
-            padding: 0.5rem;
-            border-radius: 4px;
-            transition: background 0.3s ease, color 0.3s ease;
+            padding: 0.75rem 1rem;
+            border-radius: 6px;
+            transition: background 0.2s ease, color 0.2s ease;
         }
-        
+
         .nav-menu a:hover {
-            background: #667eea;
-            color: white;
+            background: var(--bg-card);
+            color: var(--accent-purple);
         }
-        
+
         .nav-overlay {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100vh;
-            background: rgba(0,0,0,0.5);
+            background: rgba(0,0,0,0.6);
+            backdrop-filter: blur(4px);
+            -webkit-backdrop-filter: blur(4px);
             display: none;
             z-index: 999;
         }
-        
+
         .nav-overlay.active {
             display: block;
         }
-        
+
         .hero {
             text-align: center;
-            padding: 4rem 2rem;
-            max-width: 800px;
+            padding: 6rem 2rem 4rem;
+            max-width: 850px;
             margin: 0 auto;
         }
-        
+
+        .hero-badge {
+            display: inline-block;
+            padding: 0.4rem 1rem;
+            background: rgba(139, 92, 246, 0.1);
+            border: 1px solid rgba(139, 92, 246, 0.3);
+            border-radius: 999px;
+            font-size: 0.85rem;
+            color: var(--accent-purple);
+            margin-bottom: 1.5rem;
+            letter-spacing: 0.02em;
+        }
+
         .hero h2 {
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
-            color: #667eea;
+            font-size: clamp(2.25rem, 5vw, 3.5rem);
+            margin-bottom: 1.25rem;
+            background: linear-gradient(135deg, #ffffff 0%, var(--accent-purple) 50%, var(--accent-blue) 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: -0.03em;
+            line-height: 1.1;
         }
-        
+
         .hero p {
-            font-size: 1.2rem;
-            color: #b0b0b0;
-            margin-bottom: 2rem;
+            font-size: 1.15rem;
+            color: var(--text-muted);
+            margin-bottom: 2.5rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
         }
-        
-        .container {
-            max-width: 1200px;
-            margin: 2rem auto;
-            padding: 0 2rem;
+
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
         }
-        
+
         .cta-button {
             display: inline-block;
-            padding: 1rem 2rem;
-            background: #667eea;
+            padding: 0.85rem 1.75rem;
+            background: linear-gradient(135deg, var(--accent-purple-deep) 0%, var(--accent-blue-deep) 100%);
             color: white;
             text-decoration: none;
-            border-radius: 4px;
-            transition: background 0.3s ease;
-            font-size: 1.1rem;
+            border-radius: 8px;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            font-size: 1rem;
+            font-weight: 500;
+            box-shadow: 0 4px 20px rgba(124, 58, 237, 0.3);
         }
-        
+
         .cta-button:hover {
-            background: #764ba2;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 28px rgba(124, 58, 237, 0.45);
         }
-        
+
+        .cta-button.secondary {
+            background: var(--bg-card);
+            border: 1px solid var(--border-strong);
+            box-shadow: none;
+        }
+
+        .cta-button.secondary:hover {
+            background: var(--bg-card-hover);
+            border-color: var(--accent-purple);
+            box-shadow: 0 0 0 1px var(--accent-purple);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .section-label {
+            display: inline-block;
+            font-size: 0.85rem;
+            color: var(--accent-blue);
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            margin-bottom: 0.75rem;
+            font-weight: 500;
+        }
+
+        .section-header h2 {
+            font-size: 2.25rem;
+            color: var(--text);
+            letter-spacing: -0.02em;
+            margin-bottom: 0.75rem;
+        }
+
+        .section-header p {
+            color: var(--text-muted);
+            font-size: 1.05rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
         .projects {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
+            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+            gap: 1.5rem;
             margin-top: 2rem;
         }
-        
+
         .project-card {
-            background: #2a2a2a;
-            border-radius: 8px;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
             padding: 2rem;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.3);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+            overflow: hidden;
         }
-        
+
+        .project-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--accent-purple), var(--accent-blue), transparent);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
         .project-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 4px 16px rgba(0,0,0,0.5);
+            transform: translateY(-4px);
+            border-color: var(--border-strong);
+            box-shadow: 0 12px 40px rgba(0,0,0,0.4), 0 0 0 1px rgba(139, 92, 246, 0.2);
         }
-        
-        .project-card h3 {
-            color: #667eea;
-            margin-bottom: 1rem;
-            font-size: 1.5rem;
+
+        .project-card:hover::before {
+            opacity: 1;
         }
-        
-        .project-card p {
-            color: #b0b0b0;
-            margin-bottom: 1rem;
-        }
-        
-        .project-card a {
+
+        .project-tag {
             display: inline-block;
-            padding: 0.5rem 1rem;
-            background: #667eea;
-            color: white;
-            text-decoration: none;
+            padding: 0.25rem 0.65rem;
+            background: rgba(96, 165, 250, 0.1);
+            border: 1px solid rgba(96, 165, 250, 0.25);
             border-radius: 4px;
-            transition: background 0.3s ease;
-        }
-        
-        .project-card a:hover {
-            background: #764ba2;
-        }
-        
-        .intro {
-            background: #2a2a2a;
-            padding: 2rem;
-            border-radius: 8px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.3);
-            margin-bottom: 2rem;
-        }
-        
-        .intro h2 {
-            color: #e0e0e0;
+            font-size: 0.75rem;
+            color: var(--accent-blue);
             margin-bottom: 1rem;
+            letter-spacing: 0.03em;
         }
-        
+
+        .project-card h3 {
+            color: var(--text);
+            margin-bottom: 0.75rem;
+            font-size: 1.4rem;
+            letter-spacing: -0.01em;
+        }
+
+        .project-card .project-desc {
+            color: var(--text-muted);
+            margin-bottom: 1.25rem;
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        .project-features {
+            list-style: none;
+            margin-bottom: 1.5rem;
+        }
+
+        .project-features li {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            padding: 0.25rem 0;
+            padding-left: 1.25rem;
+            position: relative;
+        }
+
+        .project-features li::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0.7rem;
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--accent-purple), var(--accent-blue));
+        }
+
+        .project-links {
+            display: flex;
+            gap: 0.75rem;
+            flex-wrap: wrap;
+        }
+
+        .project-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            padding: 0.55rem 1rem;
+            background: var(--bg-elevated);
+            border: 1px solid var(--border-strong);
+            color: var(--text);
+            text-decoration: none;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+        }
+
+        .project-link:hover {
+            background: var(--bg-card-hover);
+            border-color: var(--accent-purple);
+            color: var(--accent-purple);
+        }
+
+        .project-link.primary {
+            background: linear-gradient(135deg, var(--accent-purple-deep), var(--accent-blue-deep));
+            border-color: transparent;
+            color: white;
+        }
+
+        .project-link.primary:hover {
+            color: white;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 16px rgba(124, 58, 237, 0.4);
+        }
+
         footer {
             text-align: center;
-            padding: 2rem;
-            color: #888;
-            margin-top: 3rem;
+            padding: 3rem 2rem 2rem;
+            color: var(--text-dim);
+            font-size: 0.9rem;
+            border-top: 1px solid var(--border);
+            margin-top: 4rem;
         }
-        
+
         footer a {
-            color: #667eea;
+            color: var(--accent-purple);
             text-decoration: none;
+            transition: color 0.2s ease;
         }
-        
+
         footer a:hover {
-            text-decoration: underline;
+            color: var(--accent-blue);
+        }
+
+        @media (max-width: 640px) {
+            .hero {
+                padding: 4rem 1.25rem 3rem;
+            }
+            .container {
+                padding: 1.25rem;
+            }
+            .project-card {
+                padding: 1.5rem;
+            }
         }
     </style>
 </head>
 <body>
     <div class="nav-overlay" id="navOverlay"></div>
-    
+
     <header>
         <div class="header-content">
             <div class="header-title">
@@ -263,7 +457,7 @@
             </div>
         </div>
     </header>
-    
+
     <nav class="nav-menu" id="navMenu">
         <ul>
             <li><a href="index.html">Home</a></li>
@@ -273,28 +467,78 @@
             <li><a href="privacy.html">Privacy Policy</a></li>
         </ul>
     </nav>
-    
-    <div class="hero">
-        <h2>Welcome to My Portfolio</h2>
-        <p>I'm Joe Murrell, a developer passionate about creating innovative solutions and Discord integrations. Explore my work and get in touch!</p>
-        <a href="projects.html" class="cta-button">View My Projects</a>
+
+    <section class="hero">
+        <span class="hero-badge">Developer · Discord Bots · Automation</span>
+        <h2>Building tools pilots and communities actually use.</h2>
+        <p>I'm Joe Murrell. I build Discord bots and web tools — focused on aviation training, brevity codes, and AI-powered learning for DCS communities.</p>
+        <div class="hero-buttons">
+            <a href="#featured" class="cta-button">Featured Projects</a>
+            <a href="about.html" class="cta-button secondary">About Me</a>
+        </div>
+    </section>
+
+    <div class="container" id="featured">
+        <div class="section-header">
+            <div class="section-label">Featured Work</div>
+            <h2>Projects I'm building</h2>
+            <p>Discord bots designed for aviation enthusiasts and DCS pilots — combining domain knowledge with modern AI.</p>
+        </div>
+
+        <section class="projects">
+            <article class="project-card">
+                <span class="project-tag">Discord Bot · Python</span>
+                <h3>BrevityBot</h3>
+                <p class="project-desc">
+                    A Discord bot that teaches tactical brevity codes used in military aviation — complete with definitions, quizzes, and a "greenie board" leaderboard. Auto-fetches 500+ terms from Wikipedia and posts them on a schedule.
+                </p>
+                <ul class="project-features">
+                    <li>Scheduled daily brevity term posts</li>
+                    <li>Interactive multiple-choice quizzes</li>
+                    <li>Per-server config and rotation tracking</li>
+                    <li>500+ terms cached from Wikipedia</li>
+                </ul>
+                <div class="project-links">
+                    <a href="https://discord.com/oauth2/authorize?client_id=1359029668547924098" class="project-link primary" target="_blank" rel="noopener">Add to Discord</a>
+                    <a href="https://github.com/joemurrell/brevitybot" class="project-link" target="_blank" rel="noopener">GitHub →</a>
+                </div>
+            </article>
+
+            <article class="project-card">
+                <span class="project-tag">Discord Bot · AI · Python</span>
+                <h3>DarkstarAIC</h3>
+                <p class="project-desc">
+                    An AI-powered Q&amp;A and quiz Discord bot for Air Intercept Control in DCS. Powered by GPT-4.1-mini, it answers questions grounded in ACC documentation with page references — for simulation use only.
+                </p>
+                <ul class="project-features">
+                    <li>PDF-grounded answers with page citations</li>
+                    <li>Auto-generated timed quizzes (1–60 min)</li>
+                    <li>Smart topic diversity across questions</li>
+                    <li>Built on OpenAI Assistants API v2</li>
+                </ul>
+                <div class="project-links">
+                    <a href="https://github.com/joemurrell/darkstar" class="project-link primary" target="_blank" rel="noopener">View on GitHub</a>
+                    <a href="https://www.buymeacoffee.com/joemurrell" class="project-link" target="_blank" rel="noopener">Support ☕</a>
+                </div>
+            </article>
+        </section>
     </div>
-    
+
     <footer>
-        <p>© 2025 Joe Murrell | <a href="https://github.com/joemurrell">GitHub</a></p>
+        <p>© 2025 Joe Murrell · <a href="https://github.com/joemurrell">GitHub</a> · <a href="mailto:joemurrell@gmail.com">Email</a></p>
     </footer>
-    
+
     <script>
         const hamburger = document.getElementById('hamburger');
         const navMenu = document.getElementById('navMenu');
         const navOverlay = document.getElementById('navOverlay');
-        
+
         hamburger.addEventListener('click', () => {
             hamburger.classList.toggle('active');
             navMenu.classList.toggle('active');
             navOverlay.classList.toggle('active');
         });
-        
+
         navOverlay.addEventListener('click', () => {
             hamburger.classList.remove('active');
             navMenu.classList.remove('active');
